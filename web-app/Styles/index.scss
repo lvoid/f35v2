@@ -1,0 +1,13 @@
+/** Libraries **/
+@import "../ClientApp/node_modules/office-ui-fabric-core/src/sass/Fabric.scss";
+
+/** Design **/
+@import "Theme.scss";
+@import "Layout.scss";
+
+/** Pages **/
+@import "../ClientApp/src/Home/Home.scss";
+@import "../ClientApp/src/Home/MappingPreview.scss";
+@import "../ClientApp/src/Home/DownloadDialog.scss";
+@import "../ClientApp/src/Home/RemoveDialog.scss";
+@import "../ClientApp/src/Home/UploadDialog.scss";

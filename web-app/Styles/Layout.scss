@@ -1,0 +1,67 @@
+// Layout constants
+
+$border-highlight: solid 4px #bad80a;
+$border-dashed: dashed 1px #d4d4d4;
+
+$spacing-container: 16px;
+$spacing-between-components: 8px;
+$spacing-between-tight-components: 4px;
+$spacing-input-group: 20px;
+$border-radius-container: 4px;
+
+$spacing-xlarge: 32px;
+$spacing-larger: 24px;
+$spacing-large: 16px;
+$spacing-medium-large: 12px;
+$spacing-medium-plus: 10px;
+$spacing-medium: 8px;
+$spacing-schmedium: 6px;
+$spacing-small: 4px;
+
+$width-draggable: 145px;
+$height-draggable: 28px;
+$height-input: 32px;
+
+$z-index-messagebar: 2000000;
+$z-index-front: 1000;
+$z-index-middle-plus: 750;
+$z-index-middle: 500;
+$z-index-middle-minus: 250;
+$z-index-back: 1;
+
+// General layout mixins
+
+@mixin FullScreen {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    display: flex;
+}
+
+@mixin ScrollColumn {
+    display: flex;
+    flex-flow: column;
+    overflow-y: auto;
+}
+
+@mixin FlexFixed {
+    flex: 0 0 auto;
+}
+
+@mixin FlexFit {
+    flex: 1 1 1px;
+}
+
+@mixin VerticalStack($spacing: $spacing-container) {
+    display: flex;
+    flex-flow: column;
+    padding: $spacing;
+    padding-top: 0px;
+
+    > * {
+        margin: 0px;
+        margin-top: $spacing;
+    }
+}

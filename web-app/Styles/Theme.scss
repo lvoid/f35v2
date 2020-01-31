@@ -1,0 +1,60 @@
+﻿// Colors
+$color-neutral-primary: #333333;
+$color-neutral-light: #e4e4e4;
+$color-neutral-lighter: #f4f4f4;
+$color-neutral-dark: #212121;
+$color-neutral-secondary: #666666;
+$color-neutral-secondary-alt: #767676;
+$color-neutral-tertiary: #a6a6a6;
+$color-neutral-tertiary-alt: #c8c8c8;
+$color-neutral-quaternary-alt: #dadada;
+$color-green-noerror: #dff6dd;
+$color-green-light: #bad80a;
+$color-green-selected: #a0c211;
+$color-green-active: #97b517;
+$color-theme-primary: #0078d7;
+$color-theme-primary-dark: #1b559b;
+$color-theme-secondary: #2b88d8;
+$color-theme-secondary-light: #82caff;
+$color-theme-light: #c7e0f4;
+$color-theme-lighter: #deecf9;
+$color-yellow: #ffb900;
+$color-white: #ffffff;
+$color-black: #000000;
+$color-reddark: #a80000;
+$color-redlight: #fbcfd2;
+$color-redlight-light: #fde7e9;
+
+$color-persona-unique: #5c2c91;
+
+$color-button-primary: #0078d7;
+$color-button-primary-alt: #106ebe;
+$color-button-secondary: $color-neutral-secondary-alt;
+$color-foreground-disabled: $color-neutral-tertiary-alt;
+$color-icon-special: #fcbd25;
+$color-icon-primary: #2576bb;
+$color-icon-standard: $color-neutral-primary;
+$color-icon-white: #ffffff;
+$color-link-primary: #1d60ff;
+$color-valueOption-background: #905bcd;
+$color-valueOption-foreground: #ffffff;
+$color-sidebar-button-primary: #eff6fc;
+$color-persona-unique: #5c2c91;
+
+$color-excel-green: #008641;
+
+.icon-special {
+    color: $color-icon-special;
+}
+
+.icon-primary {
+    color: $color-icon-primary;
+}
+
+.icon-standard {
+    color: $color-icon-standard;
+}
+
+.icon-white {
+    color: $color-icon-white;
+}

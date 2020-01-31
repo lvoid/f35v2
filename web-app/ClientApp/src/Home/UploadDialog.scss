@@ -1,0 +1,97 @@
+.UploadModal {
+  .ModalBody {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: space-between;
+    min-height: 172px;
+    width: 400px;
+    height: 350px;
+    overflow-y: auto;
+
+    > header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 10px;
+
+      .ModalTitle {
+        margin-left: 4px;
+      }
+
+      .Close {
+        cursor: pointer;
+        position: relative;
+        opacity: 0.5;
+
+        &:hover {
+          opacity: 1;
+        }
+
+        &:focus {
+          opacity: 1;
+        }
+      }
+    }
+
+    .ButtonContainer {
+      display: flex;
+      flex-flow: row-reverse;
+      justify-content: right;
+      margin-top: 16px;
+
+      .DialogButton {
+        width: auto;
+
+        &.Cancel {
+          margin-right: 8px;
+          color: #333;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .newFileDropperHolder {
+      margin-bottom: 20px;
+    }
+
+    .newFileDropper {
+      border: 5px $color-neutral-tertiary dashed;
+      color: $color-neutral-tertiary;
+      font: bold $ms-font-size-l sans-serif;
+      text-align: center;
+      width: 97%;
+      height: 155px;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+    }
+
+    .browseButton {
+      color: rgb(100, 148, 237);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .filename {
+      color: #a0a;
+      margin-bottom: 6px;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .FileChooserInput {
+      display: none;
+    }
+
+    .UploadInstructions {
+      @include ms-font-m;
+      margin-bottom: 15px;
+
+      .Instruction {
+        margin: 0;
+        margin-left: 5px;
+      }
+    }
+  }
+}

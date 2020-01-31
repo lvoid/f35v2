@@ -1,0 +1,118 @@
+.DexterBody {
+  .ms-Viewport {
+    align-self: center;
+    padding-bottom: 40px;
+    width: 100%;
+    height: 325px;
+    overflow-y: auto;
+  }
+
+  .ms-DetailsList {
+    overflow: hidden;
+
+    .DetailsHeader {
+      display: flex;
+      flex-flow: row;
+      padding-top: $spacing-small;
+
+      .SelectAll {
+        margin-left: 43px;
+      }
+
+      .CollapseAll {
+        position: relative;
+        bottom: $spacing-small;
+        margin-left: 18px;
+      }
+
+      .SourceAttributesHeader,
+      .SourceLinksHeader {
+        @include ms-font-m;
+        margin-left: 18px;
+        width: 135px;
+      }
+
+      .DestinationAttributesHeader,
+      .DestinationLinksHeader {
+        @include ms-font-m;
+        margin-left: 220px;
+        width: 135px;
+      }
+    }
+
+    .SourceCellHeader :hover,
+    .EqualsCellHeader :hover,
+    .DestinationCellHeader :hover,
+    .ErrorCellHeader :hover {
+      background-color: $color-white;
+    }
+
+    .ms-DetailsRow {
+      background-color: $color-white;
+      border-bottom: 1px solid $color-neutral-lighter;
+    }
+
+    .ms-Dropdown-container {
+      .ms-Dropdown-title {
+        @include ms-font-m;
+        border: none;
+        background-color: inherit;
+      }
+    }
+
+    .SourceCell {
+      @include ms-font-m;
+      color: $color-neutral-secondary;
+      vertical-align: middle;
+      margin-top: $spacing-small;
+      height: 50px;
+    }
+
+    .EqualsCell {
+      vertical-align: middle;
+      margin-top: $spacing-small;
+      font-weight: 900;
+      height: 12px;
+      font-size: 18px;
+      padding-top: $spacing-medium;
+    }
+
+    .ErrorCell {
+      @include ms-font-m;
+      vertical-align: middle;
+      margin-top: $spacing-small;
+      height: 50px;
+      text-align: center;
+      color: $color-reddark;
+    }
+
+    .DestinationCell {
+      @include ms-font-m;
+      margin-top: 2px;
+      vertical-align: middle;
+      height: 50px;
+
+      .DestinationDisabled {
+        color: $color-neutral-secondary;
+        position: relative;
+        top: 5px;
+        left: 11px;
+      }
+    }
+
+    .SelectionColumn {
+      .ms-Checkbox {
+        margin-top: 1px;
+      }
+    }
+
+    .Select {
+      top: 5px;
+    }
+
+    .ms-DetailsList-headerWrapper .ms-DetailsHeader .SelectionColumnHeader {
+      width: 85px !important;
+      background-color: white;
+    }
+  }
+}

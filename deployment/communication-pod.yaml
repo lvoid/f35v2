@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: communication-pod
+    labels:
+        purpose: listen-to-netcat
+spec:
+    containers:
+        - name: ncs-listen
+          image: subfuzion/netcat
+          args: ["-vl", "8888"]
+        - name: ncs-write
+          image: subfuzion/netcat
+          args: ["localhost", "8888", "hello"]
+    restartPolicy: OnFailure

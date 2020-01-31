@@ -1,0 +1,84 @@
+html {
+  overflow: hidden;
+}
+
+.DexterBanner,
+.DexterBannerBottom {
+  width: 100%;
+  background-color: #34786e;
+  height: 34px;
+  display: flex;
+  font-size: 20px;
+
+  .Title {
+    color: #b5e2ed;
+    margin-top: 1px;
+    margin-left: 20px;
+    cursor: default;
+  }
+}
+
+.DexterBannerBottom {
+  position: absolute;
+  bottom: 0%;
+}
+
+.DexterBody {
+  @include ms-font-m;
+  display: flex;
+  flex-flow: column;
+  margin: 20px;
+  margin-left: 25%;
+  margin-right: 25%;
+  padding: 40px;
+
+  .Instructions {
+    align-self: center;
+    margin-bottom: 40px;
+    @include ms-font-l;
+  }
+
+  .ConversionDropdown {
+    width: 200px;
+    margin-top: 25px;
+  }
+
+  .DeploymentButton {
+    width: 40px;
+    margin-left: 95%;
+  }
+
+  .UploadLink {
+    font-size: 15px;
+  }
+
+  .DeploymentDestination,
+  .DeploymentInformation {
+    @include ms-font-m;
+    display: flex;
+    margin-bottom: 4px;
+
+    p {
+      margin-bottom: 0px;
+      align-self: center;
+    }
+  }
+
+  .DepDestinationBox,
+  .DepInformationBox {
+    align-self: center;
+    width: 450px;
+
+    input {
+      @include ms-font-m;
+    }
+  }
+
+  .DepDestinationBox {
+    margin-left: 60px;
+  }
+
+  .DepInformationBox {
+    margin-left: 23px;
+  }
+}
