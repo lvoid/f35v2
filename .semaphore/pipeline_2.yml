@@ -30,6 +30,7 @@ blocks:
               "${ECR_REGISTRY}/${CONTAINER_B}:${SEMAPHORE_WORKFLOW_ID}"
       secrets:
         - name: AWS
+        - name: aws-k8s
       env_vars:
         - name: AWS_DEFAULT_REGION
           value: us-east-1
@@ -46,3 +47,5 @@ agent:
 promotions:
   - name: Deploy to Kubernetes
     pipeline_file: pipeline_3.yml
+    auto_promote:
+      when: branch = 'master' AND result = 'passed'
