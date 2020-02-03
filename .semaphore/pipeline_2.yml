@@ -34,7 +34,7 @@ blocks:
         - name: AWS_DEFAULT_REGION
           value: us-east-1
         - name: ECR_REGISTRY
-          value: 870023218324.dkr.ecr.us-east-1.amazonaws.com/f35-semaphore
+          value: 870023218324.dkr.ecr.us-east-1.amazonaws.com
         - name: CONTAINER_A
           value: f35-container-a
         - name: CONTAINER_B
