@@ -9,12 +9,25 @@ blocks:
             - checkout
             - sudo pip install awscli
             - aws ecr get-login --no-include-email | bash
-            - 'docker pull "${ECR_REGISTRY}:latest" || true'
+            - cd write-container/
+            - 'docker pull "${ECR_REGISTRY}/${CONTAINER_A}:latest" || true'
             - >-
-              docker build --cache-from "${ECR_REGISTRY}:latest" -t
-              "${ECR_REGISTRY}:${SEMAPHORE_WORKFLOW_ID}" .
+              docker build --cache-from "${ECR_REGISTRY}/${CONTAINER_A}:latest"
+              -t "${ECR_REGISTRY}/${CONTAINER_A}:${SEMAPHORE_WORKFLOW_ID}" .
             - 'docker images          '
-            - 'docker push "${ECR_REGISTRY}:${SEMAPHORE_WORKFLOW_ID}"'
+            - >-
+              docker push
+              "${ECR_REGISTRY}/${CONTAINER_A}:${SEMAPHORE_WORKFLOW_ID}"
+            - cd ..
+            - cd receive-container/
+            - 'docker pull "${ECR_REGISTRY}/${CONTAINER_B}:latest" || true'
+            - >-
+              docker build --cache-from "${ECR_REGISTRY}/${CONTAINER_B}:latest"
+              -t "${ECR_REGISTRY}/${CONTAINER_B}:${SEMAPHORE_WORKFLOW_ID}" .
+            - docker images
+            - >-
+              docker push
+              "${ECR_REGISTRY}/${CONTAINER_B}:${SEMAPHORE_WORKFLOW_ID}"
       secrets:
         - name: AWS
       env_vars:
@@ -22,6 +35,10 @@ blocks:
           value: us-east-1
         - name: ECR_REGISTRY
           value: 870023218324.dkr.ecr.us-east-1.amazonaws.com/f35-semaphore
+        - name: CONTAINER_A
+          value: f35-container-a
+        - name: CONTAINER_B
+          value: f35-container-b
 agent:
   machine:
     type: e1-standard-2
