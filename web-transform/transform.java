@@ -52,5 +52,5 @@ public class ecef2lla{
     /* Done */
     return Out[2];
 
-} /* end ecef2lla TESTING COMMENTATION UPDATION DONT BLAME ME*/
+} /* end ecef2lla */
 }
