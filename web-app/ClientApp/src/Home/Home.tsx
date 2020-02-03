@@ -111,7 +111,7 @@ export class Home extends React.Component {
           <TextField
             className="DepDestinationBox"
             disabled
-            placeholder="http://gitlab.dev.simventions.com/ScottSummerford/dexter-test"
+                    placeholder="https://github.com/jjgccg/f35v2"
           ></TextField>
         </div>
 

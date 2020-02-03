@@ -1,10 +1,11 @@
-cd C:/Projects/dexter-test
+cd ../..
 git checkout master
 git pull
-cd c:\projects\dexter-test\conversion_folder
+cd web-transform\
 del /q *
-copy C:\Projects\DexterCore\Uploads\%1 C:\Projects\dexter-test\conversion_folder\
-rename %1 conversion.java
+cd ..
+copy web-app\Uploads\%1 web-transform\
+rename web-transform\%1 transform.java
 git add .
 git commit -m "AUTO-GENERATED - Deploying new dexter conversion"
 git push

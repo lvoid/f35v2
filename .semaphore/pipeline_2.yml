@@ -1,0 +1,45 @@
+version: v1.0
+name: Dockerize
+blocks:
+  - name: Build
+    task:
+      jobs:
+        - name: Docker Build
+          commands:
+            - checkout
+            - sudo pip install awscli
+            - aws ecr get-login --no-include-email | bash
+            - cd write-container/
+            - 'docker pull "${ECR_REGISTRY}/${CONTAINER_A}:latest" || true'
+            - >-
+              docker build --cache-from "${ECR_REGISTRY}/${CONTAINER_A}:latest"
+              -t "${ECR_REGISTRY}/${CONTAINER_A}:${SEMAPHORE_WORKFLOW_ID}" .
+            - 'docker images          '
+            - >-
+              docker push
+              "${ECR_REGISTRY}/${CONTAINER_A}:${SEMAPHORE_WORKFLOW_ID}"
+            - cd ..
+            - cd receive-container/
+            - 'docker pull "${ECR_REGISTRY}/${CONTAINER_B}:latest" || true'
+            - >-
+              docker build --cache-from "${ECR_REGISTRY}/${CONTAINER_B}:latest"
+              -t "${ECR_REGISTRY}/${CONTAINER_B}:${SEMAPHORE_WORKFLOW_ID}" .
+            - docker images
+            - >-
+              docker push
+              "${ECR_REGISTRY}/${CONTAINER_B}:${SEMAPHORE_WORKFLOW_ID}"
+      secrets:
+        - name: AWS
+      env_vars:
+        - name: AWS_DEFAULT_REGION
+          value: us-east-1
+        - name: ECR_REGISTRY
+          value: 870023218324.dkr.ecr.us-east-1.amazonaws.com
+        - name: CONTAINER_A
+          value: f35-container-a
+        - name: CONTAINER_B
+          value: f35-container-b
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
