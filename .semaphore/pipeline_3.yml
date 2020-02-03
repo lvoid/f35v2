@@ -7,7 +7,7 @@ blocks:
         - name: Deploy
           commands:
             - checkout
-            - 'cat /home/semaphore/.kube.config      '
+            - 'cat /home/semaphore/.kube/config      '
             - mkdir -p ~/bin
             - >-
               curl -o ~/bin/aws-iam-authenticator
