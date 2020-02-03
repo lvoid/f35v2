@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,11 +11,11 @@ namespace DexterCore.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class DeployController : ControllerBase
+    public class TransformController : ControllerBase
     {
-        private readonly ILogger<DeployController> _logger;
+        private readonly ILogger<TransformController> _logger;
 
-        public DeployController(ILogger<DeployController> logger)
+        public TransformController(ILogger<TransformController> logger)
         {
             _logger = logger;
         }
@@ -25,8 +23,9 @@ namespace DexterCore.Controllers
         [HttpGet("GetFiles")]
         public IEnumerable<string> GetFiles()
         {
-            var files = Directory
-                .EnumerateFiles("C:\\Projects\\DexterCore\\Uploads")
+
+            IEnumerable<string> files = Directory
+                .EnumerateFiles(PATH + "\\Uploads")
                 .Select(Path.GetFileName);
 
             IEnumerable<string> fileNames = files.AsEnumerable();
@@ -34,16 +33,24 @@ namespace DexterCore.Controllers
             return fileNames;
         }
 
-        [HttpPost("UploadTransform")]
-        public string UploadTransform(IFormFile file)
+
+        [HttpGet("GetLastDeploy")]
+        public string GetLastDeploy()
+        {
+            string parentFolder = Directory.GetParent(PATH).FullName;
+            DateTime lastWriteTime = Directory.GetLastWriteTime(parentFolder + "\\web-transform");
+
+            return lastWriteTime.ToString();
+        }
+
+        [HttpPost("Upload")]
+        public string Upload(IFormFile file)
         {
             if (file != null)
-            {
-                var uploads = "C:\\Projects\\DexterCore\\Uploads";
-            
+            {            
                 if (file.Length > 0)
                 {
-                    var filePath = Path.Combine(uploads, file.FileName);
+                    var filePath = Path.Combine(PATH + "\\Uploads\\", file.FileName);
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
                         file.CopyToAsync(fileStream);
@@ -64,9 +71,9 @@ namespace DexterCore.Controllers
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.CreateNoWindow = true;
-                process.StartInfo.FileName = "C:\\Projects\\DexterCore/Scripts\\deploy_dexter_conversion.bat";
+                process.StartInfo.FileName = PATH + "\\Scripts\\deploy_dexter_conversion.bat";
                 process.StartInfo.Arguments = fileName;
-                process.StartInfo.WorkingDirectory = "C:\\Projects\\DexterCore/Scripts\\";
+                process.StartInfo.WorkingDirectory = PATH + "\\Scripts\\";
 
                 process.Start();
                 string output = null;
