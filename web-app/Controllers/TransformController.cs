@@ -60,8 +60,8 @@ namespace DexterCore.Controllers
             return "Uploaded Transformation";
         }
 
-        [HttpPost("DeployTransform")]
-        public string DeployTransform([FromForm] string fileName)
+        [HttpPost("Deploy")]
+        public string Deploy([FromForm] string fileName)
         {
             try
             {
