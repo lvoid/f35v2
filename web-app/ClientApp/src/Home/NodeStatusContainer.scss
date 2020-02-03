@@ -1,0 +1,49 @@
+.NodeStatusContainer {
+  margin-top: 60px;
+  margin-left: 40px;
+
+  .Node {
+    font-size: 24px;
+
+    &.Active {
+      color: $color-excel-green;
+    }
+
+    &.Inactive {
+      color: $color-reddark;
+    }
+  }
+
+  .NodeStatusHeader {
+    @include ms-font-l;
+    display: flex;
+    font-weight: 400;
+    margin-bottom: $spacing-small;
+
+    .HeaderText {
+      margin-top: 1px;
+      margin-bottom: 0;
+    }
+  }
+
+  .NodeLabel {
+    align-self: center;
+    margin-bottom: 2px;
+    margin-left: $spacing-small;
+    @include ms-font-m;
+  }
+
+  .NodePair {
+    display: flex;
+    margin-bottom: $spacing-small;
+  }
+
+  .RefreshButton {
+    margin-left: 100px;
+    background-color: $color-white;
+
+    :hover {
+      color: $color-theme-primary-dark;
+    }
+  }
+}

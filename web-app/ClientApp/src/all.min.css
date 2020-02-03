@@ -13014,49 +13014,84 @@ html {
   bottom: 0%; }
 
 .DexterBody {
-  font-size: 14px;
-  font-weight: 400;
   display: flex;
-  flex-flow: column;
-  margin: 20px;
-  margin-left: 25%;
-  margin-right: 25%;
-  padding: 40px; }
-  .DexterBody .Instructions {
-    align-self: center;
-    margin-bottom: 40px;
-    font-size: 17px;
-    font-weight: 300; }
-  .DexterBody .ConversionDropdown {
-    width: 200px;
-    margin-top: 25px; }
-  .DexterBody .DeploymentButton {
-    width: 40px;
-    margin-left: 95%; }
-  .DexterBody .UploadLink {
-    font-size: 15px; }
-  .DexterBody .DeploymentDestination,
-  .DexterBody .DeploymentInformation {
+  flex-flow: row; }
+  .DexterBody .MappingContainer {
     font-size: 14px;
     font-weight: 400;
     display: flex;
-    margin-bottom: 4px; }
-    .DexterBody .DeploymentDestination p,
-    .DexterBody .DeploymentInformation p {
-      margin-bottom: 0px;
-      align-self: center; }
-  .DexterBody .DepDestinationBox,
-  .DexterBody .DepInformationBox {
-    align-self: center;
-    width: 450px; }
-    .DexterBody .DepDestinationBox input,
-    .DexterBody .DepInformationBox input {
+    flex-flow: column;
+    margin: 20px;
+    margin-left: 20%;
+    padding: 40px; }
+    .DexterBody .MappingContainer .Instructions {
+      align-self: center;
+      margin-bottom: 40px;
+      font-size: 17px;
+      font-weight: 300; }
+    .DexterBody .MappingContainer .ConversionDropdown {
+      width: 200px;
+      margin-top: 25px; }
+    .DexterBody .MappingContainer .DeploymentButton {
+      width: 40px;
+      margin-left: 95%; }
+    .DexterBody .MappingContainer .UploadLink {
+      font-size: 15px; }
+    .DexterBody .MappingContainer .DeploymentDestination,
+    .DexterBody .MappingContainer .DeploymentInformation {
       font-size: 14px;
-      font-weight: 400; }
-  .DexterBody .DepDestinationBox {
-    margin-left: 60px; }
-  .DexterBody .DepInformationBox {
-    margin-left: 23px; }
+      font-weight: 400;
+      display: flex;
+      margin-bottom: 4px; }
+      .DexterBody .MappingContainer .DeploymentDestination p,
+      .DexterBody .MappingContainer .DeploymentInformation p {
+        margin-bottom: 0px;
+        align-self: center; }
+    .DexterBody .MappingContainer .DepDestinationBox,
+    .DexterBody .MappingContainer .DepInformationBox {
+      align-self: center;
+      width: 450px; }
+      .DexterBody .MappingContainer .DepDestinationBox input,
+      .DexterBody .MappingContainer .DepInformationBox input {
+        font-size: 14px;
+        font-weight: 400; }
+    .DexterBody .MappingContainer .DepDestinationBox {
+      margin-left: 60px; }
+    .DexterBody .MappingContainer .DepInformationBox {
+      margin-left: 23px; }
+
+.NodeStatusContainer {
+  margin-top: 60px;
+  margin-left: 40px; }
+  .NodeStatusContainer .Node {
+    font-size: 24px; }
+    .NodeStatusContainer .Node.Active {
+      color: #008641; }
+    .NodeStatusContainer .Node.Inactive {
+      color: #a80000; }
+  .NodeStatusContainer .NodeStatusHeader {
+    font-size: 17px;
+    font-weight: 300;
+    display: flex;
+    font-weight: 400;
+    margin-bottom: 4px; }
+    .NodeStatusContainer .NodeStatusHeader .HeaderText {
+      margin-top: 1px;
+      margin-bottom: 0; }
+  .NodeStatusContainer .NodeLabel {
+    align-self: center;
+    margin-bottom: 2px;
+    margin-left: 4px;
+    font-size: 14px;
+    font-weight: 400; }
+  .NodeStatusContainer .NodePair {
+    display: flex;
+    margin-bottom: 4px; }
+  .NodeStatusContainer .RefreshButton {
+    margin-left: 100px;
+    background-color: #ffffff; }
+    .NodeStatusContainer .RefreshButton :hover {
+      color: #1b559b; }
 
 .DexterBody .ms-Viewport {
   align-self: center;

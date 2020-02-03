@@ -24,61 +24,65 @@ html {
 }
 
 .DexterBody {
-  @include ms-font-m;
   display: flex;
-  flex-flow: column;
-  margin: 20px;
-  margin-left: 25%;
-  margin-right: 25%;
-  padding: 40px;
+  flex-flow: row;
 
-  .Instructions {
-    align-self: center;
-    margin-bottom: 40px;
-    @include ms-font-l;
-  }
-
-  .ConversionDropdown {
-    width: 200px;
-    margin-top: 25px;
-  }
-
-  .DeploymentButton {
-    width: 40px;
-    margin-left: 95%;
-  }
-
-  .UploadLink {
-    font-size: 15px;
-  }
-
-  .DeploymentDestination,
-  .DeploymentInformation {
+  .MappingContainer {
     @include ms-font-m;
     display: flex;
-    margin-bottom: 4px;
+    flex-flow: column;
+    margin: 20px;
+    margin-left: 25%;
+    padding: 40px;
 
-    p {
-      margin-bottom: 0px;
+    .Instructions {
       align-self: center;
+      margin-bottom: 40px;
+      @include ms-font-l;
     }
-  }
 
-  .DepDestinationBox,
-  .DepInformationBox {
-    align-self: center;
-    width: 450px;
+    .ConversionDropdown {
+      width: 200px;
+      margin-top: 25px;
+    }
 
-    input {
+    .DeploymentButton {
+      width: 40px;
+      margin-left: 95%;
+    }
+
+    .UploadLink {
+      font-size: 15px;
+    }
+
+    .DeploymentDestination,
+    .DeploymentInformation {
       @include ms-font-m;
+      display: flex;
+      margin-bottom: 4px;
+
+      p {
+        margin-bottom: 0px;
+        align-self: center;
+      }
     }
-  }
 
-  .DepDestinationBox {
-    margin-left: 60px;
-  }
+    .DepDestinationBox,
+    .DepInformationBox {
+      align-self: center;
+      width: 450px;
 
-  .DepInformationBox {
-    margin-left: 23px;
+      input {
+        @include ms-font-m;
+      }
+    }
+
+    .DepDestinationBox {
+      margin-left: 60px;
+    }
+
+    .DepInformationBox {
+      margin-left: 23px;
+    }
   }
 }

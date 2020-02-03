@@ -14,6 +14,7 @@ import { DexCommandBar } from "./CommandBar";
 import { observable } from "mobx";
 import { UploadDialog } from "./UploadDialog";
 import { observer } from "mobx-react";
+import { NodeStatusContainer } from "./NodeStatusContainer";
 
 // winky face
 export class HomeStore {
@@ -95,59 +96,62 @@ export class Home extends React.Component {
   renderBody() {
     return (
       <div className="DexterBody">
-        <header className="Instructions">
-          {"Choose an existing mapping, or "}
-          <Link
-            className="UploadLink"
-            onClick={() => this.store.openUploadModal()}
-          >
-            upload a new Dexter-generated map
+        <div className="MappingContainer">
+          <header className="Instructions">
+            {"Choose an existing mapping, or "}
+            <Link
+              className="UploadLink"
+              onClick={() => this.store.openUploadModal()}
+            >
+              upload a new Dexter-generated map
           </Link>
-          {" to deploy."}
-        </header>
+            {" to deploy."}
+          </header>
 
-        <div className="DeploymentDestination">
-          <p>Deployment Destination: </p>
-          <TextField
-            className="DepDestinationBox"
-            disabled
-                    placeholder="https://github.com/jjgccg/f35v2"
-          ></TextField>
+          <div className="DeploymentDestination">
+            <p>Deployment Destination: </p>
+            <TextField
+              className="DepDestinationBox"
+              disabled
+              placeholder="https://github.com/jjgccg/f35v2"
+            ></TextField>
+          </div>
+
+          <div className="DeploymentInformation">
+            <p>Deployment Site - Last update: </p>
+            <TextField
+              className="DepInformationBox"
+              disabled
+              placeholder={this.store.lastDeploy}
+            ></TextField>
+          </div>
+
+          <Dropdown
+            className="ConversionDropdown"
+            options={this.store.options}
+            placeholder="Select an option"
+            defaultSelectedKey={"d1"}
+            onChange={(event, option) => {
+              if (option) {
+                this.selectedOption = option;
+              }
+            }}
+          ></Dropdown>
+          <MappingPreview />
+          <PrimaryButton
+            disabled={this.selectedOption == undefined}
+            className="DeploymentButton"
+            primary
+            onClick={() => this.deployConversion()}
+          >
+            {this.store.inProgress == true ? (
+              <Spinner size={SpinnerSize.small}></Spinner>
+            ) : (
+                "Deploy"
+              )}
+          </PrimaryButton>
         </div>
-
-        <div className="DeploymentInformation">
-          <p>Deployment Site - Last update: </p>
-          <TextField
-            className="DepInformationBox"
-            disabled
-            placeholder={this.store.lastDeploy}
-          ></TextField>
-        </div>
-
-        <Dropdown
-          className="ConversionDropdown"
-          options={this.store.options}
-          placeholder="Select an option"
-          defaultSelectedKey={"d1"}
-          onChange={(event, option) => {
-            if (option) {
-              this.selectedOption = option;
-            }
-          }}
-        ></Dropdown>
-        <MappingPreview />
-        <PrimaryButton
-          disabled={this.selectedOption == undefined}
-          className="DeploymentButton"
-          primary
-          onClick={() => this.deployConversion()}
-        >
-          {this.store.inProgress == true ? (
-            <Spinner size={SpinnerSize.small}></Spinner>
-          ) : (
-            "Deploy"
-          )}
-        </PrimaryButton>
+        <NodeStatusContainer></NodeStatusContainer>
       </div>
     );
   }
