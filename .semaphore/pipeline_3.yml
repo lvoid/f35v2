@@ -1,0 +1,72 @@
+version: v1.0
+name: Pipeline 3
+blocks:
+  - name: Deploy
+    task:
+      jobs:
+        - name: Deploy
+          commands:
+            - 'checkout            '
+            - mkdir -p ~/bin
+            - >-
+              curl -o ~/bin/aws-iam-authenticator
+              https://amazon-eks.s3-us-west-2.amazonaws.com/1.12.7/2019-03-27/bin/linux/amd64/aws-iam-authenticator
+            - chmod a+x ~/bin/aws-iam-authenticator
+            - 'export PATH=~/bin:$PATH'
+            - sudo pip install awscli
+            - >-
+              export ECR_PASSWORD=$(aws ecr get-login --no-include-email | awk
+              '{print $6}')
+            - kubectl delete secret aws-ecr || true
+            - >-
+              kubectl create secret docker-registry aws-ecr
+              --docker-server="https://$ECR_REGISTRY" --docker-username=AWS
+              --docker-password="$ECR_PASSWORD"
+            - cd deployment/
+            - 'envsubst < deployment.yaml | tee deploy.yaml            '
+            - kubectl apply -f deploy.yaml
+      secrets:
+        - name: AWS
+        - name: aws-k8s
+      env_vars:
+        - name: AWS_DEFAULT_REGION
+          value: us-east-1
+        - name: ECR_REGISTRY
+          value: 870023218324.dkr.ecr.us-east-1.amazonaws.com
+  - name: Tag latest release
+    task:
+      secrets:
+        - name: AWS
+        - name: aws-k8s
+      env_vars:
+        - name: AWS_DEFAULT_REGION
+          value: us-east-1
+        - name: ECR_REGISTRY
+          value: 870023218324.dkr.ecr.us-east-1.amazonaws.com
+        - name: CONTAINER_A
+          value: f35-container-a
+        - name: CONTAINER_B
+          value: f35-container-b
+      jobs:
+        - name: Docker tag latest
+          commands:
+            - sudo pip install awscli
+            - aws ecr get-login --no-include-email | bash
+            - >-
+              docker pull
+              "${ECR_REGISTRY}/${CONTAINER_A}:$SEMAPHORE_WORKFLOW_ID"
+            - >-
+              docker tag "${ECR_REGISTRY}/${CONTAINER_A}:$SEMAPHORE_WORKFLOW_ID"
+              "${ECR_REGISTRY}/${CONTAINER_A}:latest"
+            - 'docker push "${ECR_REGISTRY}/${CONTAINER_A}:latest"'
+            - >-
+              docker pull
+              "${ECR_REGISTRY}/${CONTAINER_B}:$SEMAPHORE_WORKFLOW_ID"
+            - >-
+              docker tag "${ECR_REGISTRY}/${CONTAINER_B}:$SEMAPHORE_WORKFLOW_ID"
+              "${ECR_REGISTRY}/${CONTAINER_B}:latest"
+            - 'docker push "${ECR_REGISTRY}/${CONTAINER_B}:latest"'
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
