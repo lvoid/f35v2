@@ -34,6 +34,10 @@ blocks:
           value: us-east-1
         - name: ECR_REGISTRY
           value: 870023218324.dkr.ecr.us-east-1.amazonaws.com
+        - name: CONTAINER_A
+          value: f35-container-a
+        - name: CONTAINER_B
+          value: f35-container-b
   - name: Tag latest release
     task:
       secrets:
