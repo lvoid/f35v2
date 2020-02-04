@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: f35-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: f35-deployment
+    template:
+        metadata:
+            labels:
+                app: f35-deployment
+        spec:
+            containers:
+                - name: f35-container-a
+                  image: "${ECR_REGISTRY}/${CONTAINER_A}:${SEMAPHORE_WORKFLOW_ID}"
+                  args: ["localhost", "8888", "hello"]
+                - name: f35-container-b
+                  image: "${ECR_REGISTRY}/${CONTAINER_B}:${SEMAPHORE_WORKFLOW_ID}"
+                  args: ["-vl", "8888"]
+            imagePullSecrets:
+                - name: aws-ecr
