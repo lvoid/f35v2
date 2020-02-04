@@ -24,7 +24,9 @@ blocks:
               --docker-server="https://$ECR_REGISTRY" --docker-username=AWS
               --docker-password="$ECR_PASSWORD"
             - cd deployment/
-            - 'envsubst < f35-deployment.yaml | tee f35-deploy.yaml            '
+            - >-
+              envsubst < f35-deployment.yaml | tee
+              f35-deployment.yaml            
             - kubectl apply -f f35-deployment.yaml
       secrets:
         - name: AWS
