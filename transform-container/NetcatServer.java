@@ -1,6 +1,9 @@
 
 import java.io.*;
 import static java.lang.System.exit;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -61,11 +64,6 @@ public class NetcatServer {
     String[] values = line.split(" ");
     double[] output = transformInput(values);
 
-    // Todo - netcat in and send it to the party. For now, just log.
-    for (double convertedValue : output) {
-      serverWriter.println(convertedValue);
-    }
-
     return output;
   }
 
@@ -87,31 +85,22 @@ public class NetcatServer {
   private static void sendToReadContainer(double[] output) {
     serverWriter.println("Transform complete. Executing transfer to linked node.");
 
-    String outputLine = output.toString();
-    boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
-
     try {
-      Process process;
-      String[] commange = { "sh", "/usr/app/SendNetcatMessage.bat" };
-      if (isWindows) {
-        // I don't think we're going to get far if this shows up as windows.
-        serverWriter.println("Cannot use netcat with Windows. Please change the containers OS and try again.");
-        return;
-      } else {
-        process = Runtime.getRuntime().exec(commange);
+      DatagramSocket ds = new DatagramSocket();
+
+      InetAddress ip = InetAddress.getByName("172.17.0.3");
+      byte buf[] = null;
+
+      String inp = "" + output[0] + " " + output[1] + " " + output[2];
+      buf = inp.getBytes();
+      DatagramPacket DpSend = new DatagramPacket(buf, buf.length, ip, 8888);
+
+      ds.send(DpSend);
+
+      if (inp.equals("Stop")) {
+        exit(0);
       }
 
-      BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-      String line;
-
-      while ((line = reader.readLine()) != null) {
-        serverWriter.println(line);
-      }
-
-      debugErrorStatements(process);
-
-      int exitCode = process.waitFor();
-      assert exitCode == 0;
     } catch (Exception ex) {
       serverWriter.println(ex.getMessage());
     }
