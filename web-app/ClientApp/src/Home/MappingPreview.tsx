@@ -114,8 +114,10 @@ export class MappingPreview extends React.Component {
           <div className="GroupHeaderLinkSet">
             <Link
               className="GroupHeaderLink"
-              onClick={() => {
-                props.group.isSelected = true;
+                        onClick={() => {
+                            if (props.group) {
+                                props.group.isSelected = false;
+                            }
               }}
             >
               {props.group && props.group.isSelected
@@ -124,8 +126,10 @@ export class MappingPreview extends React.Component {
             </Link>
             <Link
               className="GroupHeaderLink"
-              onClick={() => {
-                props.group.isSelected = false;
+                    onClick={() => {
+                        if (props.group) {
+                            props.group.isSelected = false;
+                        }
               }}
             >
               {props.group && props.group.isCollapsed
