@@ -19,7 +19,6 @@ spec:
                   imagePullPolicy: Always
                 - name: f35-container-b
                   image: ${ECR_REGISTRY}/${CONTAINER_B}:${SEMAPHORE_WORKFLOW_ID}
-                  args: ["-vl", "8888"]
                   imagePullPolicy: Always
                 - name: f35-dexter-upload
                   image: ${ECR_REGISTRY}/${CONTAINER_DEX}:${SEMAPHORE_WORKFLOW_ID}
