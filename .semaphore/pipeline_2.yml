@@ -28,6 +28,17 @@ blocks:
             - >-
               docker push
               "${ECR_REGISTRY}/${CONTAINER_B}:${SEMAPHORE_WORKFLOW_ID}"
+            - cd ..
+            - cd transform-container/
+            - 'docker pull "${ECR_REGISTRY}/${CONTAINER_DEX}:latest" || true'
+            - >-
+              docker build --cache-from
+              "${ECR_REGISTRY}/${CONTAINER_DEX}:latest" -t
+              "${ECR_REGISTRY}/${CONTAINER_DEX}:${SEMAPHORE_WORKFLOW_ID}" .
+            - docker images
+            - >-
+              docker push
+              "${ECR_REGISTRY}/${CONTAINER_DEX}:${SEMAPHORE_WORKFLOW_ID}"
       secrets:
         - name: AWS
         - name: aws-k8s
@@ -40,6 +51,8 @@ blocks:
           value: f35-container-a
         - name: CONTAINER_B
           value: f35-container-b
+        - name: CONTAINER_DEX
+          value: f35-dexter-upload
 agent:
   machine:
     type: e1-standard-2

@@ -24,10 +24,8 @@ blocks:
               --docker-server="https://$ECR_REGISTRY" --docker-username=AWS
               --docker-password="$ECR_PASSWORD"
             - cd deployment/
-            - >-
-              envsubst < f35-deployment.yaml | tee
-              f35-deployment.yaml            
-            - kubectl apply -f f35-deployment.yaml
+            - 'envsubst < f35-deployment.yaml | tee deploy.yaml            '
+            - kubectl apply -f deploy.yaml
       secrets:
         - name: AWS
         - name: aws-k8s
@@ -40,6 +38,8 @@ blocks:
           value: f35-container-a
         - name: CONTAINER_B
           value: f35-container-b
+        - name: CONTAINER_DEX
+          value: f35-dexter-upload
   - name: Tag latest release
     task:
       secrets:
@@ -54,6 +54,8 @@ blocks:
           value: f35-container-a
         - name: CONTAINER_B
           value: f35-container-b
+        - name: CONTAINER_DEX
+          value: f35-dexter-upload
       jobs:
         - name: Docker tag latest
           commands:
@@ -73,6 +75,14 @@ blocks:
               docker tag "${ECR_REGISTRY}/${CONTAINER_B}:$SEMAPHORE_WORKFLOW_ID"
               "${ECR_REGISTRY}/${CONTAINER_B}:latest"
             - 'docker push "${ECR_REGISTRY}/${CONTAINER_B}:latest"'
+            - >-
+              docker pull
+              "${ECR_REGISTRY}/${CONTAINER_DEX}:$SEMAPHORE_WORKFLOW_ID"
+            - >-
+              docker tag
+              "${ECR_REGISTRY}/${CONTAINER_DEX}:$SEMAPHORE_WORKFLOW_ID"
+              "${ECR_REGISTRY}/${CONTAINER_DEX}:latest"
+            - 'docker push "${ECR_REGISTRY}/${CONTAINER_DEX}:latest"'
 agent:
   machine:
     type: e1-standard-2
