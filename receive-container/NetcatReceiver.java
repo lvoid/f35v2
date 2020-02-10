@@ -1,10 +1,10 @@
 
-import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.Scanner;
+import java.io.BufferedWriter;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.io.FileWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Modified server code for Dexter demo
@@ -12,11 +12,6 @@ import java.net.DatagramSocket;
 public class NetcatReceiver
 {
 
-  private static Scanner scanner;
-  private static Socket connectionSocket;
-  private static InputStream serverInput;
-  private static OutputStream serverOuput;
-  private static PrintWriter serverWriter;
   private static final int PORT = 8888;
 
   public static void main(String[] args)
@@ -26,35 +21,40 @@ public class NetcatReceiver
 
   public static void initializeServer()
   {
-    try{
-      DatagramSocket ds = new DatagramSocket(8888);
+    try {
+      DatagramSocket ds = new DatagramSocket(PORT);
       byte[] receive = new byte[65535];
 
       DatagramPacket DpReceive = null;
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+
       while (true) {
 
         DpReceive = new DatagramPacket(receive, receive.length);
+        FileWriter fileWriter = new FileWriter("outputLog.txt", true);
+        BufferedWriter writer = new BufferedWriter(fileWriter);
+        Date date = new Date(System.currentTimeMillis());
 
         ds.receive(DpReceive);
-        System.out.println(data(receive));
+        System.out.println("Logged data: " + data(receive));
 
         if (data(receive).toString().equals("Stop")) {
           System.out.println("Stopping server");
           break;
         }
 
+        writer.write(formatter.format(date).toString() + " Logged transform: " + data(receive));
+        writer.newLine();
+
+        writer.close();
+        fileWriter.close();
         receive = new byte[65535];
       }
+
     }
     catch (Exception e) {
       e.printStackTrace();
     }
-  }
-
-  private static void readServerInput()
-  {
-    String line = scanner.nextLine();
-    System.out.println(line);
   }
 
   public static StringBuilder data(byte[] a)
