@@ -15,9 +15,11 @@ spec:
             containers:
                 - name: f35-container-a
                   image: "${ECR_REGISTRY}/${CONTAINER_A}:${SEMAPHORE_WORKFLOW_ID}"
-                  args: ["localhost", "8888", "hello"]
+                  args: ["localhost", "9991", "32 32 32"]
                 - name: f35-container-b
                   image: "${ECR_REGISTRY}/${CONTAINER_B}:${SEMAPHORE_WORKFLOW_ID}"
                   args: ["-vl", "8888"]
+                - name: f35-dexter-upload
+                  image: "${ECR_REGISTRY}/${CONTAINER_DEX}:${SEMAPHORE_WORKFLOW_ID}"
             imagePullSecrets:
                 - name: aws-ecr
