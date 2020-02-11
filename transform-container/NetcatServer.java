@@ -88,7 +88,7 @@ public class NetcatServer {
     try {
       DatagramSocket ds = new DatagramSocket();
 
-      InetAddress ip = InetAddress.getByName("172.17.0.3");
+      InetAddress ip = InetAddress.getByName("127.0.0.1");
       byte buf[] = null;
 
       String inp = "" + output[0] + " " + output[1] + " " + output[2];
