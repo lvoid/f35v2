@@ -2,4 +2,4 @@ FROM alpine:edge as BUILD
 
 RUN apk add --no-cache netcat-openbsd
 
-ENTRYPOINT ["nc"]
+CMD echo "32 32 32" | nc localhost 9991

@@ -22,7 +22,6 @@ spec:
             containers:
                 - name: f35-container-a
                   image: ${ECR_REGISTRY}/${CONTAINER_A}:${SEMAPHORE_WORKFLOW_ID}
-                  args: ["localhost", "9991", "32 32 32"]
                   imagePullPolicy: Always
             imagePullSecrets:
                 - name: aws-ecr
