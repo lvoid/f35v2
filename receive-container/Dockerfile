@@ -4,4 +4,4 @@ COPY ./outputLog.txt /usr/app/
 WORKDIR /usr/app
 EXPOSE 8888
 RUN javac NetcatReceiver.java
-CMD java NetcatReceiver &
+CMD java NetcatReceiver
