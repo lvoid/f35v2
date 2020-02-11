@@ -16,9 +16,13 @@ spec:
                 - name: f35-dexter-upload
                   image: ${ECR_REGISTRY}/${CONTAINER_DEX}:${SEMAPHORE_WORKFLOW_ID}
                   imagePullPolicy: Always
+                  ports:
+                      - containerPort: 9991
                 - name: f35-container-b
                   image: ${ECR_REGISTRY}/${CONTAINER_B}:${SEMAPHORE_WORKFLOW_ID}
                   imagePullPolicy: Always
+                  ports:
+                      - containerPort: 8888
                 - name: f35-container-a
                   image: ${ECR_REGISTRY}/${CONTAINER_A}:${SEMAPHORE_WORKFLOW_ID}
                   imagePullPolicy: Always
